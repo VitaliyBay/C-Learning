@@ -18,11 +18,13 @@ int main() {
 
     while(currentVoltage >= minVoltage) {
         printf(
-            "Pack %.2f V | Cell %.2f V | SoC %.1f%% | State %s\n",
+            "Pack %.2f V | Cell %.2f V | SoC %.1f%% | State %s | Warning %s\n",
             currentVoltage,
             currentVoltage / cells,
             getEstimatedPercentagePerPackage(currentVoltage, cells),
-            batteryStateToString(getStatePerPackage(currentVoltage, cells)));
+            batteryStateToString(getStatePerPackage(currentVoltage, cells)),
+            batteryWarningToString(getWarningPerPackage(currentVoltage, cells))
+        );
         printf("\n");
 
         currentVoltage -= dischargeStep;

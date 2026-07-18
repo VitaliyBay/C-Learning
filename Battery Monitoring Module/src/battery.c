@@ -113,3 +113,42 @@ char *batteryStateToString(BatteryState state) {
             return "UNKNOWN";
     }
 }
+
+BatteryWarning getWarningPerPackage(float currentVoltage, uint8_t cells) {
+    float batteryPercentage = getEstimatedPercentagePerPackage(currentVoltage, cells);
+
+    if(batteryPercentage >= 20 && batteryPercentage <= 30) {
+        return BATTERY_WARNING_LOW_BATTERY;
+    }
+
+    if(batteryPercentage >= 10 && batteryPercentage <= 19) {
+        return BATTERY_WARNING_RETURN_HOME;
+    }
+
+    if(batteryPercentage <= 9) {
+        return BATTERY_WARNING_LAND_NOW;
+    }
+    
+    return BATTERY_WARNING_NONE;
+}
+
+
+char *batteryWarningToString(BatteryWarning warning) {
+    switch (warning)
+    {
+        case BATTERY_WARNING_NONE:
+            return "NONE";
+
+        case BATTERY_WARNING_LOW_BATTERY:
+            return "LOW BATTERY";
+
+        case BATTERY_WARNING_RETURN_HOME:
+            return "RETURN HOME";
+
+        case BATTERY_WARNING_LAND_NOW:
+            return "LAND NOW";
+        
+        default:
+            return "UNKNOWN";
+    }
+}
