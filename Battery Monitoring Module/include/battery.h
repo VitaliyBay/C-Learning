@@ -21,8 +21,11 @@ typedef enum {
 
 float getEstimatedPercentagePerCell(float cellVoltage);
 float getEstimatedPercentagePerPackage(float currentVoltage, uint8_t cells);
+
 BatteryState getStatePerPackage(float currentVoltage, uint8_t cells);
+BatteryState getStatePerPackageByBatteryPercentage(float batteryPercentage);
 char *batteryStateToString(BatteryState state);
+
 BatteryWarning getWarningPerPackage(float currentVoltage, uint8_t cells);
 char *batteryWarningToString(BatteryWarning warning);
 

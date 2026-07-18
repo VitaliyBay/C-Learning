@@ -17,12 +17,14 @@ int main() {
     float minVoltage = 3.2 * cells;
 
     while(currentVoltage >= minVoltage) {
+        float batteryPercentage = getEstimatedPercentagePerPackage(currentVoltage, cells);
+
         printf(
             "Pack %.2f V | Cell %.2f V | SoC %.1f%% | State %s | Warning %s\n",
             currentVoltage,
             currentVoltage / cells,
-            getEstimatedPercentagePerPackage(currentVoltage, cells),
-            batteryStateToString(getStatePerPackage(currentVoltage, cells)),
+            batteryPercentage,
+            batteryStateToString(getStatePerPackageByBatteryPercentage(batteryPercentage)),
             batteryWarningToString(getWarningPerPackage(currentVoltage, cells))
         );
         printf("\n");

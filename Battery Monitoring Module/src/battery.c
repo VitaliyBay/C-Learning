@@ -65,6 +65,10 @@ float getEstimatedPercentagePerPackage(float currentVoltage, uint8_t cells) {
 BatteryState getStatePerPackage(float currentVoltage, uint8_t cells) {
     float batteryPercentage = getEstimatedPercentagePerPackage(currentVoltage, cells);
 
+    return getStatePerPackageByBatteryPercentage(batteryPercentage);
+}
+
+BatteryState getStatePerPackageByBatteryPercentage(float batteryPercentage) {
     if(batteryPercentage >= 95) {
         return BATTERY_STATE_FULL;
     }
