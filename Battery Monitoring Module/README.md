@@ -13,4 +13,4 @@ Features
 
 Example
 
-Pack: 24.80 V | Cell: 4.13 V | SoC: 93.2% | State GOOD 
+Pack: 24.80 V | Cell: 4.13 V | SoC: 93.2% | State GOOD | Warning NONE
