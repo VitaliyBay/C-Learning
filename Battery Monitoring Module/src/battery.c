@@ -107,7 +107,7 @@ char *batteryStateToString(BatteryState state) {
             return "CRITICAL";
             
         case BATTERY_STATE_EMPTY:
-            return "EMOTY";
+            return "EMPTY";
         
         default:
             return "UNKNOWN";
