@@ -25,7 +25,7 @@ int main() {
             currentVoltage / cells,
             batteryPercentage,
             batteryStateToString(getStatePerPackageByBatteryPercentage(batteryPercentage)),
-            batteryWarningToString(getWarningPerPackage(currentVoltage, cells))
+            batteryWarningToString(getWarningPerPackageByBatteryPercentage(batteryPercentage))
         );
         printf("\n");
 

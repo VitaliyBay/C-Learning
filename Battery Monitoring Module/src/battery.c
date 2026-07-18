@@ -121,6 +121,10 @@ char *batteryStateToString(BatteryState state) {
 BatteryWarning getWarningPerPackage(float currentVoltage, uint8_t cells) {
     float batteryPercentage = getEstimatedPercentagePerPackage(currentVoltage, cells);
 
+    return getWarningPerPackageByBatteryPercentage(batteryPercentage);
+}
+
+BatteryWarning getWarningPerPackageByBatteryPercentage(float batteryPercentage) {
     if(batteryPercentage >= 20 && batteryPercentage <= 30) {
         return BATTERY_WARNING_LOW_BATTERY;
     }

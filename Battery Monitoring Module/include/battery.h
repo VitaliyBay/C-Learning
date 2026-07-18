@@ -27,6 +27,7 @@ BatteryState getStatePerPackageByBatteryPercentage(float batteryPercentage);
 char *batteryStateToString(BatteryState state);
 
 BatteryWarning getWarningPerPackage(float currentVoltage, uint8_t cells);
+BatteryWarning getWarningPerPackageByBatteryPercentage(float batteryPercentage);
 char *batteryWarningToString(BatteryWarning warning);
 
 #endif
