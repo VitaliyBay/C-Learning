@@ -61,3 +61,55 @@ float getEstimatedPercentagePerCell(float cellVoltage) {
 float getEstimatedPercentagePerPackage(float currentVoltage, uint8_t cells) {
     return getEstimatedPercentagePerCell(currentVoltage / cells);
 }
+
+BatteryState getStatePerPackage(float currentVoltage, uint8_t cells) {
+    float batteryPercentage = getEstimatedPercentagePerPackage(currentVoltage, cells);
+
+    if(batteryPercentage >= 95) {
+        return BATTERY_STATE_FULL;
+    }
+
+    if(batteryPercentage >= 70 && batteryPercentage <= 94) {
+        return BATTERY_STATE_GOOD;
+    }
+
+    if(batteryPercentage >= 40 && batteryPercentage <= 69) {
+        return BATTERY_STATE_NORMAL;
+    }
+
+    if(batteryPercentage >= 20 && batteryPercentage <= 39) {
+        return BATTERY_STATE_LOW;
+    }
+
+    if(batteryPercentage >= 10 && batteryPercentage <= 19) {
+        return BATTERY_STATE_CRITICAL;
+    }
+
+    return BATTERY_STATE_EMPTY;
+}
+
+char *batteryStateToString(BatteryState state) {
+    switch (state)
+    {
+        case BATTERY_STATE_FULL:
+            return "FULL";
+
+        case BATTERY_STATE_GOOD:
+            return "GOOD";
+            
+        case BATTERY_STATE_NORMAL:
+            return "NORMAL";
+            
+        case BATTERY_STATE_LOW:
+            return "LOW";
+            
+        case BATTERY_STATE_CRITICAL:
+            return "CRITICAL";
+            
+        case BATTERY_STATE_EMPTY:
+            return "EMOTY";
+        
+        default:
+            return "UNKNOWN";
+    }
+}
