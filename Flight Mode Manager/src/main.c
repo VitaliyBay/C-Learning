@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 typedef enum {
     COMMAND_INVALID = -1,
@@ -21,12 +22,15 @@ typedef enum {
     FLIGHT_MODE_EXITING = 5,
 } FlightMode;
 
+void logTransition(FlightMode mode);
+void logError(char *errorMessage);
 int validateInput(char *input, FlightMode currentMode, char **errorMessage);
 
 Command getCurrentCommand(char *inputText);
 char *commandToString(Command command);
 
 FlightMode getCurrentMode(char *inputText);
+
 char *modeToString(FlightMode mode);
 
 int validateCommand(Command command);
@@ -46,6 +50,7 @@ int main() {
 
         if(result == 1) {
             printf("Invalid command %s, with error '%s'. Try again\n", inputText, errorMessage);
+            logError(errorMessage);
             continue;
         }
 
@@ -53,8 +58,50 @@ int main() {
         currentMode = getCurrentMode(inputText);
 
         printf("Let's go with %s, current mode is %s\n", commandToString(currentCommand), modeToString(currentMode));
+
+        logTransition(currentMode);
     }
     return 0;
+}
+
+void logError(char *errorMessage) {
+    FILE *logFile = fopen("logs/logs.txt", "a");
+
+    if (logFile == NULL) {
+        perror("Failed to open logs.txt");
+        return;
+    }
+
+    time_t now;
+    time(&now);
+    struct tm *t = localtime(&now);
+    char buffer[100];
+
+    strftime(buffer, sizeof(buffer), "%H:%M:%S", t);
+    
+    fprintf(logFile, "_ERROR_ %s - %s\n", buffer, errorMessage);
+
+    fclose(logFile);
+}
+
+void logTransition(FlightMode mode) {
+    FILE *logFile = fopen("logs/logs.txt", "a");
+
+    if (logFile == NULL) {
+        perror("Failed to open logs.txt");
+        return;
+    }
+
+    time_t now;
+    time(&now);
+    struct tm *t = localtime(&now);
+    char buffer[100];
+
+    strftime(buffer, sizeof(buffer), "%H:%M:%S", t);
+
+    fprintf(logFile, "%s - %s\n", buffer, modeToString(mode));
+
+    fclose(logFile);
 }
 
 int validateInput(char *input, FlightMode currentMode, char **errorMessage) {
@@ -93,6 +140,7 @@ int validateInput(char *input, FlightMode currentMode, char **errorMessage) {
         return 0;
     }
 
+    *errorMessage = "Invalid command";
     return 1;
 }
 

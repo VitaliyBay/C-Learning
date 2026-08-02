@@ -1,0 +1,12 @@
+03:34:21 - ARMED
+03:34:26 - TAKEOFF
+_ERROR_ 03:39:07 - Drone should be armed
+03:39:22 - ARMED
+03:39:26 - TAKEOFF
+_ERROR_ 03:39:32 - Drone should be armed
+_ERROR_ 03:39:39 - Drone should be armed
+_ERROR_ 03:40:26 - Invalid command
+03:40:30 - ARMED
+03:40:36 - TAKEOFF
+03:40:39 - DISARMED
+_ERROR_ 03:40:42 - Drone should be armed
