@@ -21,7 +21,7 @@ typedef enum {
     FLIGHT_MODE_EXITING = 5,
 } FlightMode;
 
-int validateInput(char *input);
+int validateInput(char *input, FlightMode currentMode, char **errorMessage);
 
 Command getCurrentCommand(char *inputText);
 char *commandToString(Command command);
@@ -34,17 +34,18 @@ int validateCommand(Command command);
 int main() {
     Command currentCommand = COMMAND_DISARM;
     FlightMode currentMode = FLIGHT_MODE_DISARMED;
-    char inputText[10] = {"asd"};
+    char *errorMessage = NULL;
+    char inputText[10];
 
     while(currentCommand != COMMAND_EXIT) {
         printf("Command: ");
         scanf("%s", inputText);
         printf("Your command %s\n", inputText);
 
-        int result = validateInput(inputText);
+        int result = validateInput(inputText, currentMode, &errorMessage);
 
         if(result == 1) {
-            printf("Invalid command %s, try again\n", inputText);
+            printf("Invalid command %s, with error '%s'. Try again\n", inputText, errorMessage);
             continue;
         }
 
@@ -56,20 +57,36 @@ int main() {
     return 0;
 }
 
-int validateInput(char *input) {
+int validateInput(char *input, FlightMode currentMode, char **errorMessage) {
     if(strcmp(input, "DISARM") == 0 || strcmp(input, "disarm") == 0) {
         return 0;
     }
     if(strcmp(input, "ARM") == 0 || strcmp(input, "arm") == 0) {
-        return 0;
+        if(currentMode == FLIGHT_MODE_DISARMED) {
+            return 0;
+        }
+        *errorMessage = "Drone should be disarmed";
+        return 1;
     }
     if(strcmp(input, "TAKEOFF") == 0 || strcmp(input, "takeoff") == 0) {
-        return 0;
+        if(currentMode == FLIGHT_MODE_ARMED) {
+            return 0;
+        }
+        *errorMessage = "Drone should be armed";
+        return 1;
     }
     if(strcmp(input, "LOITER") == 0 || strcmp(input, "loiter") == 0) {
+        if(currentMode == FLIGHT_MODE_ARMED) {
+            return 0;
+        }
+        *errorMessage = "Drone should be armed";
         return 0;
     }
     if(strcmp(input, "LAND") == 0 || strcmp(input, "land") == 0) {
+        if(currentMode == FLIGHT_MODE_ARMED) {
+            return 0;
+        }
+        *errorMessage = "Drone should be armed";
         return 0;
     }
     if(strcmp(input, "EXIT") == 0 || strcmp(input, "exit") == 0) {
