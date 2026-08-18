@@ -1,27 +1,36 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdint.h>
 
-char buffer[7][5] = {"_", "_", "_", "_", "_", "_", "_"};
+uint8_t buffer[7] = {0};
 
 void printBuffer();
 int pointer = 0;
-char byte[] = "";
 
 int main() {
     printBuffer();
 
-    while (pointer != -1)
+    while (1)
     {
-        printf("Byte in position %i: ", pointer);
-        scanf("%s", &byte);
+        unsigned int value;
 
-        if(strcmp(byte, "0") == 0) {
-            pointer = -1;
+        printf("Byte in position %d (hex, 0 to exit): 0x", pointer);
+        
+        if(scanf("%x", &value) != 1) {
+            printf("Invalid input\n");
+            return 1;
+        }
+
+        if(value == 0) {
             printf("\nExit");
             return 0;
         }
 
-        strcpy(buffer[pointer], byte);
+        if(value > 0xFF) {
+            printf("Value must be between 0x00 and 0xFF\n");
+            continue;
+        }
+
+        buffer[pointer] = (uint8_t)value;
 
         pointer += 1;
  
@@ -41,7 +50,7 @@ void printBuffer() {
     printf("Buffer:");
     for (int i = 0; i < 7; i++)
     {
-        printf(" %s", buffer[i]);
+        printf(" 0x%02X", buffer[i]);
     }
     printf("\n");
 }
