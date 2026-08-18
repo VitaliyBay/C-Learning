@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdint.h>
 
-uint8_t buffer[7] = {0};
+#define BUFFER_SIZE 7
+
+uint8_t buffer[BUFFER_SIZE] = {0};
 
 void printBuffer();
 int pointer = 0;
@@ -34,7 +36,7 @@ int main() {
 
         pointer += 1;
  
-        if(pointer >= 7) {
+        if(pointer >= BUFFER_SIZE) {
             pointer = 0;
             printf("\nReset pinter %i to position 0\n", pointer);
         }
@@ -48,7 +50,7 @@ int main() {
 
 void printBuffer() {
     printf("Buffer:");
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < BUFFER_SIZE; i++)
     {
         printf(" 0x%02X", buffer[i]);
     }
