@@ -1,17 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-
-#define FLAG_ARMED           (1u << 0)
-#define FLAG_GPS_AVAILABLE   (1u << 1)
-#define FLAG_BATTERY_LOW     (1u << 2)
-#define FLAG_GPS_HOME_SET    (1u << 3)
-#define FLAG_FAILSAFE        (1u << 4)
-#define FLAG_MOTORS_ENABLED  (1u << 5)
-
-void setFlag(uint32_t *flags, uint32_t flag);
-void clearFlag(uint32_t *flags, uint32_t flag);
-bool isFlagSet(uint32_t flags, uint32_t flag);
+#include "bit_flags.h"
 
 static void printBinary(uint32_t flags) {
     for(int i = 31; i >= 0; i--) {
@@ -66,16 +56,4 @@ int main() {
     printStatus(flags);
 
     return 0;
-}
-
-void setFlag(uint32_t *flags, uint32_t flag) {
-    *flags |= flag;
-}
-
-void clearFlag(uint32_t *flags, uint32_t flag) {
-    *flags &= ~flag;
-}
-
-bool isFlagSet(uint32_t flags, uint32_t flag) {
-    return (flags & flag) != 0;
 }
