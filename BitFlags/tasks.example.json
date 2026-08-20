@@ -1,0 +1,67 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build BitFlags",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "src/main.c",
+                "src/bit_flags.c",
+                "-Iinclude",
+                "-Wall",
+                "-Wextra",
+                "-std=c11",
+                "-o",
+                "build/BitFlags.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Run BitFlags Demo",
+            "type": "shell",
+            "command": ".\\build\\BitFlags.exe",
+            "dependsOn": "Build BitFlags Demo",
+            "problemMatcher": []
+        },
+        {
+            "label": "[Tests] Build BitFlags Tests",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "tests/test_bit_flags.c",
+                "src/bit_flags.c",
+                "-Iinclude",
+                "-Wall",
+                "-Wextra",
+                "-std=c11",
+                "-o",
+                "build/tests/test_bit_flags.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "[Tests] Run BitFlags Tests",
+            "type": "shell",
+            "command": ".\\build\\tests\\test_bit_flags.exe",
+            "dependsOn": "Build BitFlags Tests",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
