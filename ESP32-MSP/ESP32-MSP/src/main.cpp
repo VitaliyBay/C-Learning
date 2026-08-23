@@ -70,13 +70,47 @@ void setup() {
   FCSerial.begin(115200, SERIAL_8N1, FC_RX_PIN, FC_TX_PIN);
 
   Serial.println("ESP32 started!");
-  Serial.println("FC UART initialized");
+  Serial.println("FC UART initialized 2");
 }
 
 void loop() {
-  while(FCSerial.available()) {
-    uint8_t byte = FCSerial.read();
+  
+  Serial.println("Init loop");
+  //Ask FC for battery/status information
+  sendMCP(MSP_ANALOG);
 
-    Serial.printf("%02X ", byte);
+  delay(100);
+
+  uint8_t command;
+  uint8_t payload[64];
+  uint8_t payloadSize;
+
+  if (readMSP(command, payload, payloadSize)) {
+    Serial.print("Received MSP command: ");
+    Serial.println(command);
+
+    Serial.print("Payload size: ");
+    Serial.println(payloadSize);
+
+    Serial.print("Data: ");
+
+    for (uint8_t i = 0; i < payloadSize; i++) {
+      Serial.printf("%02X ", payload[i]);
+    }
+
+    Serial.println();
+
+    // MSP_ANALOG:
+    // first byte = battery voltage / 10
+
+    if(command == MSP_ANALOG && payloadSize >= 1) {
+      float voltage = payload[0] / 10.0f;
+
+      Serial.print("Battery voltage: ");
+      Serial.print(voltage);
+      Serial.println(" V");
+    }
   }
+
+  delay(1000);
 }
