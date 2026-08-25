@@ -105,10 +105,21 @@ void loop() {
 
     if(command == MSP_ANALOG && payloadSize >= 1) {
       float voltage = payload[0] / 10.0f;
+      float current = payload[1] | (payload[2] << 8);
+      float rssi = payload[3] | (payload[4] << 8);
 
       Serial.print("Battery voltage: ");
       Serial.print(voltage);
       Serial.println(" V");
+
+      
+      Serial.print("Current consumed: ");
+      Serial.print(current);
+      Serial.println(" mAh");
+
+      
+      Serial.print("RSSI: ");
+      Serial.print(rssi);
     }
   }
 
