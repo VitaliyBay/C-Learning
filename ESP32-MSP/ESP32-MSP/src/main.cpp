@@ -111,13 +111,11 @@ void loop() {
       Serial.print("Battery voltage: ");
       Serial.print(voltage);
       Serial.println(" V");
-
       
       Serial.print("Current consumed: ");
       Serial.print(current);
       Serial.println(" mAh");
 
-      
       Serial.print("RSSI: ");
       Serial.print(rssi);
     }
