@@ -8,6 +8,7 @@ const char* flight_state_to_string(FlightState state) {
         case FLYING: return "FLYING";
         case FAILSAFE: return "FAILSAFE";
         case UNKNOWN: return "UNKNOWN";
+        default: return "UNKNOWN";
     }
 }
 
@@ -17,13 +18,13 @@ int main() {
         {24.6f, 12, 0.0f, 0.0f, 0.0f, 0, 0},
         {24.3f, 12, 2.5f, 1.2f, -0.5f, 30, 1},
         {23.8f, 11, 45.0f, 4.2f, -2.1f, 55, 1},
-        {20.7f, 10, 50.0f, 5.0f, 1.0f, 60, 1},
+        {20.7f, 10, 50.0f, 60.0f, 1.0f, 60, 1},
         {22.1f, 5, 48.0f, 38.0f, 5.0f, 70, 1}
     };
     int length = sizeof(telemetry) / sizeof(telemetry[0]);
     for(int i = 1; i <= length; i++) {
         printf("---- Telementry #%d ----\n", i);
-        FlightState state = get_flight_state(&telemetry[i]);
+        FlightState state = get_flight_state(&telemetry[i - 1]);
         printf("State %s \n", flight_state_to_string(state));
     }
 
