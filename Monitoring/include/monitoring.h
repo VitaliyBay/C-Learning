@@ -15,9 +15,10 @@ typedef enum {
     DISARMED,
     ARMED,
     FLYING,
-    FAILSAFE
+    FAILSAFE,
+    UNKNOWN
 } FlightState;
 
-FlightState get_flight_state(const DroneTelemetry *telemetry[]);
+FlightState get_flight_state(const DroneTelemetry *telemetry);
 
 #endif // MONITORING_H
