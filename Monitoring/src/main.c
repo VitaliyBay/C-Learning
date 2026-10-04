@@ -1,9 +1,19 @@
  #include <stdio.h>
 #include "monitoring.h"
 
+const char* flight_state_to_string(FlightState state) {
+    switch(state) {
+        case ARMED: return "ARMED";
+        case DISARMED: return "DISARMED";
+        case FLYING: return "FLYING";
+        case FAILSAFE: return "FAILSAFE";
+        case UNKNOWN: return "UNKNOWN";
+    }
+}
+
 int main() {
     printf("Hello, World!\n");
-    DroneTelemetry telemetry[] = {
+    const DroneTelemetry telemetry[] = {
         {24.6f, 12, 0.0f, 0.0f, 0.0f, 0, 0},
         {24.3f, 12, 2.5f, 1.2f, -0.5f, 30, 1},
         {23.8f, 11, 45.0f, 4.2f, -2.1f, 55, 1},
@@ -13,6 +23,8 @@ int main() {
     int length = sizeof(telemetry) / sizeof(telemetry[0]);
     for(int i = 1; i <= length; i++) {
         printf("---- Telementry #%d ----\n", i);
+        FlightState state = get_flight_state(&telemetry[i]);
+        printf("State %s \n", flight_state_to_string(state));
     }
 
     return 0;
