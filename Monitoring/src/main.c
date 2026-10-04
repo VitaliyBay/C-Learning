@@ -1,14 +1,5 @@
  #include <stdio.h>
-
-typedef struct {
-    float battery_voltage;
-    int gps_satellites;
-    float altitude;
-    float roll;
-    float pitch;
-    int throttle;
-    int armed;
-} DroneTelemetry;
+#include "monitoring.h"
 
 int main() {
     printf("Hello, World!\n");
