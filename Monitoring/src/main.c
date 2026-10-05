@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
 #include "monitoring.h"
 
 const char* flight_state_to_string(FlightState state) {
@@ -13,7 +13,6 @@ const char* flight_state_to_string(FlightState state) {
 }
 
 int main() {
-    printf("Hello, World!\n");
     const DroneTelemetry telemetry[] = {
         {24.6f, 12, 0.0f, 0.0f, 0.0f, 0, 0},
         {24.3f, 12, 2.5f, 1.2f, -0.5f, 30, 1},
@@ -26,6 +25,9 @@ int main() {
         printf("---- Telementry #%d ----\n", i);
         FlightState state = get_flight_state(&telemetry[i - 1]);
         printf("State %s \n", flight_state_to_string(state));
+        printf("Warnings: ");
+        print_monitoring_warnings(&telemetry[i - 1]);
+        printf("\n\n");
     }
 
     return 0;
