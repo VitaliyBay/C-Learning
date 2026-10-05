@@ -20,5 +20,6 @@ typedef enum {
 } FlightState;
 
 FlightState get_flight_state(const DroneTelemetry *telemetry);
+void print_monitoring_warnings(const DroneTelemetry *telemetry);
 
 #endif // MONITORING_H
