@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 #include "monitoring.h"
 
 const char* flight_state_to_string(FlightState state) {
@@ -9,6 +10,37 @@ const char* flight_state_to_string(FlightState state) {
         case FAILSAFE: return "FAILSAFE";
         case UNKNOWN: return "UNKNOWN";
         default: return "UNKNOWN";
+    }
+}
+
+void print_warning_flags(const uint32_t warning_flags) {
+    if(warning_flags & WARNING_LOW_BATTERY) {
+        printf("\n     - LOW BATTERY");
+    }
+    if(warning_flags & WARNING_GPS_SIGNAL_WEAK) {
+        printf("\n     - GPS SIGNAL WEAK");
+    }
+    if(warning_flags & WARNING_HIGH_ROLL_ANGLE) {
+        printf("\n     - HIGH ROLL ANGLE");
+    }
+    if(warning_flags & WARNING_HIGH_PITCH_ANGLE) {
+        printf("\n     - HIGH PITCH ANGLE");
+    }
+    if(warning_flags & CRITICAL_BATTERY) {
+        printf("\n     - BATTERY CRITICAL");
+    }
+    if(warning_flags & CRITICAL_GPS_SIGNAL) {
+        printf("\n     - GPS SIGNAL LOST");
+    }
+    if(warning_flags & CRITICAL_ROLL_ANGLE) {
+        printf("\n     - ROLL ANGLE TOO HIGH");
+    }
+    if(warning_flags & CRITICAL_PITCH_ANGLE) {
+        printf("\n     - ROLL PITCH TOO HIGH");
+    }
+
+    if(warning_flags == 0) {
+        printf("  None");
     }
 }
 
@@ -26,7 +58,8 @@ int main() {
         FlightState state = get_flight_state(&telemetry[i - 1]);
         printf("State %s \n", flight_state_to_string(state));
         printf("Warnings: ");
-        print_monitoring_warnings(&telemetry[i - 1]);
+        const uint32_t warning_flags = get_warning_flags(&telemetry[i - 1]);
+        print_warning_flags(warning_flags);
         printf("\n\n");
     }
 
