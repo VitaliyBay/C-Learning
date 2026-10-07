@@ -55,10 +55,10 @@ int main() {
     int length = sizeof(telemetry) / sizeof(telemetry[0]);
     for(int i = 1; i <= length; i++) {
         printf("---- Telementry #%d ----\n", i);
-        FlightState state = get_flight_state(&telemetry[i - 1]);
+        const uint32_t warning_flags = get_warning_flags(&telemetry[i - 1]);
+        FlightState state = get_flight_state(&telemetry[i - 1], warning_flags);
         printf("State %s \n", flight_state_to_string(state));
         printf("Warnings: ");
-        const uint32_t warning_flags = get_warning_flags(&telemetry[i - 1]);
         print_warning_flags(warning_flags);
         printf("\n\n");
     }
