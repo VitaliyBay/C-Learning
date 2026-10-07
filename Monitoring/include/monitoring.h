@@ -11,7 +11,9 @@
 #define CRITICAL_BATTERY           (1u << 4)
 #define CRITICAL_GPS_SIGNAL        (1u << 5)
 #define CRITICAL_ROLL_ANGLE        (1u << 6)
-#define CRITICAL_PITCH_ANGLE       (1u << 7) 
+#define CRITICAL_PITCH_ANGLE       (1u << 7)
+
+#define CRITICAL_FLAGS (CRITICAL_BATTERY | CRITICAL_GPS_SIGNAL | CRITICAL_ROLL_ANGLE | CRITICAL_PITCH_ANGLE)
 
 typedef struct {
     float battery_voltage;
@@ -31,7 +33,7 @@ typedef enum {
     UNKNOWN
 } FlightState;
 
-FlightState get_flight_state(const DroneTelemetry *telemetry);
+FlightState get_flight_state(const DroneTelemetry *telemetry, uint32_t warning_flags);
 void print_monitoring_warnings(const DroneTelemetry *telemetry);
 uint32_t get_warning_flags(const DroneTelemetry *telemetry);
 
