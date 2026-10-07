@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include <stdint.h>
 
-FlightState get_flight_state(const DroneTelemetry *telemetry) {
+FlightState get_flight_state(const DroneTelemetry *telemetry, uint32_t warning_flags) {
     if(telemetry->armed == 0) {
         return DISARMED;
     }
 
-    if(telemetry->armed == 1 && (telemetry->battery_voltage < 18 || telemetry->gps_satellites < 4 || fabsf(telemetry->roll) > 45.0 || fabsf(telemetry->pitch) > 45.0)) {
+    if(warning_flags & CRITICAL_FLAGS) {
         return FAILSAFE;
     }
 
