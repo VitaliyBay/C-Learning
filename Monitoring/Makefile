@@ -12,7 +12,7 @@ $(TARGET): $(SRC)
 	$(CC) $(INCLUDE) $(CFLAGS) $(SRC) -o $(TARGET)
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(TARGET)
 
 run:
 	./drone_monitor
