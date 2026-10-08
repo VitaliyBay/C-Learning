@@ -1,18 +1,21 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Wpedantic
+CFLAGS = -Wall -Wextra -Wpedantic -std=c11 -Iinclude
 
 TARGET = drone_monitor
 
-INCLUDE = -Iinclude/
-
 SRC = src/main.c src/monitoring.c
 
-$(TARGET): $(SRC)
-	$(CC) $(INCLUDE) $(CFLAGS) $(SRC) -o $(TARGET)
+OBJ = $(SRC:.c=.o)
+
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(OBJ) $(TARGET)
 
 run:
 	./drone_monitor
