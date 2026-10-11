@@ -63,4 +63,4 @@ typedef struct {
     FlightStatus flight_status;
 } DroneTelemetry;
 
-#endif
+#endif // TYPES_H
