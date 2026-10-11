@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Wpedantic -std=c11
+CFLAGS = -Wall -Wextra -Wpedantic -I../common -std=c11
 
 TARGET = mockFC
 
