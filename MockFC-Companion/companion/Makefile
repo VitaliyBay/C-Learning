@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Wpedantic -I../common -std=c11
 
 TARGET = companion
 
-SRC = src/main.c
+SRC = ../common/validations.c src/main.c
 
 OBJ = $(SRC:.c=.o)
 
