@@ -57,7 +57,11 @@ bool attitude_valid(Attitude attitude) {
 }
 
 bool gps_satelites_valid(uint8_t satelites) {
-    return false;
+    if(satelites < 0 || satelites > 32) {
+        return false;
+    }
+
+    return true;
 }
 
 bool battery_voltage_valid(float voltage) {
