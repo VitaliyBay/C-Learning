@@ -29,7 +29,15 @@ bool gps_coordinates_valid(double latitude_deg, double longitude_deg) {
 }
 
 bool rc_value_valid(uint16_t value) {
-    return false;
+    if(value < 1000) {
+        return false;
+    }
+
+    if(value > 2000) {
+        return false;
+    }
+
+    return true;
 }
 
 bool attitude_valid(Attitude altitude) {
