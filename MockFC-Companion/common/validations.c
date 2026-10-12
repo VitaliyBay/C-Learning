@@ -65,5 +65,9 @@ bool gps_satelites_valid(uint8_t satelites) {
 }
 
 bool battery_voltage_valid(float voltage) {
-    return false;
+    if(voltage < 0 || voltage > 30) {
+        return false;
+    }
+
+    return true;
 }
