@@ -57,7 +57,7 @@ bool attitude_valid(Attitude attitude) {
 }
 
 bool gps_satelites_valid(uint8_t satelites) {
-    if(satelites < 0 || satelites > 32) {
+    if(satelites > 32) {
         return false;
     }
 
