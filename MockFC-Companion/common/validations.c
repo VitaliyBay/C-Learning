@@ -40,8 +40,20 @@ bool rc_value_valid(uint16_t value) {
     return true;
 }
 
-bool attitude_valid(Attitude altitude) {
-    return false;
+bool attitude_valid(Attitude attitude) {
+    if(attitude.roll_deg < -180 || attitude.roll_deg > 180) {
+        return false;
+    }
+
+    if(attitude.pitch_deg < -180 || attitude.pitch_deg > 180) {
+        return false;
+    }
+
+    if(attitude.yaw_deg < 0 || attitude.yaw_deg > 360) {
+        return false;
+    }
+
+    return true;
 }
 
 bool gps_satelites_valid(uint8_t satelites) {
