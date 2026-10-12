@@ -8,6 +8,8 @@ SRC = test_validations.c ../common/validations.c
 
 OBJ = $(SRC:.c=.o)
 
+all: run
+
 $(TARGET): $(OBJ)
 	$(CC) $(OBJ) -o $(TARGET)
 
@@ -17,5 +19,5 @@ $(TARGET): $(OBJ)
 clean:
 	rm -f $(OBJ) $(TARGET)
 
-run:
-	./test_validations
+run: $(TARGET)
+	./$(TARGET)
