@@ -1,4 +1,4 @@
-#include <assert.h>
+9#include <assert.h>
 #include <stdio.h>
 #include "validations.h"
 
@@ -74,6 +74,10 @@ int main(void) {
     test_gps_satelites_valid_with_negative_value();
     test_gps_satelites_valid_with_value_greater_than_32();
     test_gps_satelites_valid_with_correct_value();
+
+    // TODO: Add attitude_valid tests
+
+    // TODO: Add battery_voltage_valid tests
 
     printf("All tests passed!\n");
 
