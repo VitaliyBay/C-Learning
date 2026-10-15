@@ -1,4 +1,4 @@
-9#include <assert.h>
+#include <assert.h>
 #include <stdio.h>
 #include "validations.h"
 
@@ -59,6 +59,24 @@ static void test_gps_satelites_valid_with_correct_value() {
     assert(gps_satelites_valid(satelites) == true);
 }
 
+static void test_battery_voltage_valid_with_negative_value() {
+    float voltage = -1;
+
+    assert(battery_voltage_valid(voltage) == false);
+}
+
+static void test_battery_voltage_valid_with_value_greater_than_30() {
+    float voltage = 35;
+
+    assert(battery_voltage_valid(voltage) == false);
+}
+
+static void test_battery_voltage_valid_with_correct_value() {
+    float voltage = 12;
+
+    assert(battery_voltage_valid(voltage) == true);
+}
+
 int main(void) {
     // gps_coordinates_valid
     test_gps_coordinates_valid_with_latitude_deg_lower_that_negative_90();
@@ -77,7 +95,10 @@ int main(void) {
 
     // TODO: Add attitude_valid tests
 
-    // TODO: Add battery_voltage_valid tests
+    // battery_voltage_valid
+    test_battery_voltage_valid_with_negative_value();
+    test_battery_voltage_valid_with_value_greater_than_30();
+    test_battery_voltage_valid_with_correct_value();
 
     printf("All tests passed!\n");
 
