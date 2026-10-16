@@ -77,6 +77,26 @@ static void test_battery_voltage_valid_with_correct_value() {
     assert(battery_voltage_valid(voltage) == true);
 }
 
+static void test_attitude_valid_roll_deg_with_invalid_negative_value() {
+    Attitude attitude_with_invalid_negative_value = {
+        .roll_deg = -190,
+        .pitch_deg = 0,
+        .yaw_deg = 0
+    };
+
+    assert(attitude_valid(attitude_with_invalid_negative_value) == false);
+}
+
+static void test_attitude_valid_roll_deg_with_invalid_positive_value() {
+    Attitude attitude_with_invalid_positive_value = {
+        .roll_deg = 190,
+        .pitch_deg = 0,
+        .yaw_deg = 0
+    };
+
+    assert(attitude_valid(attitude_with_invalid_positive_value) == false);
+}
+
 int main(void) {
     // gps_coordinates_valid
     test_gps_coordinates_valid_with_latitude_deg_lower_that_negative_90();
@@ -94,6 +114,8 @@ int main(void) {
     test_gps_satelites_valid_with_correct_value();
 
     // TODO: Add attitude_valid tests
+    test_attitude_valid_roll_deg_with_invalid_negative_value();
+    test_attitude_valid_roll_deg_with_invalid_positive_value();
 
     // battery_voltage_valid
     test_battery_voltage_valid_with_negative_value();
