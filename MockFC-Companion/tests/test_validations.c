@@ -113,7 +113,7 @@ int main(void) {
     test_gps_satelites_valid_with_value_greater_than_32();
     test_gps_satelites_valid_with_correct_value();
 
-    // TODO: Add attitude_valid tests
+    // attitude_valid tests
     test_attitude_valid_roll_deg_with_invalid_negative_value();
     test_attitude_valid_roll_deg_with_invalid_positive_value();
 
