@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Wpedantic -I../common -std=c11
 
 TARGET = mockFC
 
-SRC = src/main.c
+SRC = src/main.c src/sensors.c
 
 OBJ = $(SRC:.c=.o)
 
