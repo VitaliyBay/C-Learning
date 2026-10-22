@@ -138,6 +138,16 @@ static void test_attitude_valid_yaw_deg_with_invalid_positive_value() {
     assert(attitude_valid(attitude_with_invalid_positive_value) == false);
 }
 
+static void test_attitude_valid_with_valid_data() {
+    Attitude attitude_with_invalid_positive_value = {
+        .roll_deg = 0,
+        .pitch_deg = 0,
+        .yaw_deg = 0
+    };
+
+    assert(attitude_valid(attitude_with_invalid_positive_value) == true);
+}
+
 int main(void) {
     // gps_coordinates_valid
     test_gps_coordinates_valid_with_latitude_deg_lower_that_negative_90();
@@ -161,6 +171,7 @@ int main(void) {
     test_attitude_valid_pitch_deg_with_invalid_positive_value();
     test_attitude_valid_yaw_deg_with_invalid_negative_value();
     test_attitude_valid_yaw_deg_with_invalid_positive_value();
+    test_attitude_valid_with_valid_data();
 
     // battery_voltage_valid
     test_battery_voltage_valid_with_negative_value();
