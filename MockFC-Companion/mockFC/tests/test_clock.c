@@ -9,7 +9,6 @@ void test_clock_init_set_initial_value_to_0() {
     assert(clock_state.now_ms == 0);
 }
 
-
 void test_clock_advance_time_advance_to_20_ms_after_2_steps() {
     ClockState clock_state;
     clock_init(&clock_state);
