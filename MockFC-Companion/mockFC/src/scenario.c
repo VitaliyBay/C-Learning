@@ -1,6 +1,7 @@
 #include "scenario.h"
 #include "sensors.h"
 #include "clock.h"
+#include <stddef.h>
 
 void scenario_updates(ClockState *clock_state, SensorData *sensor_data) {
     if(sensor_data == NULL) {
