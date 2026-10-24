@@ -23,7 +23,7 @@ int main() {
     test_clock_init_set_initial_value_to_0();
     test_clock_advance_time_advance_to_20_ms_after_2_steps();
 
-    printf("All tests passed!");
+    printf("[TEST CLOCK] All tests passed!");
 
     return 0;
 }
