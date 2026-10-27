@@ -66,3 +66,16 @@ bool encode_u32_le(uint32_t value, uint8_t *buffer, size_t capacity) {
 
     return true;
 }
+
+bool decode_u32_le(const uint8_t *buffer, size_t length, uint32_t *value) {
+    if(buffer == NULL || value == NULL || length < 4) {
+        return false;
+    }
+
+    value = (uint32_t)buffer[0] 
+                && ((uint32_t)buffer[1] << 8)
+                && ((uint32_t)buffer[2] << 16)
+                && ((uint32_t)buffer[3] << 24);
+
+    return true;
+}
