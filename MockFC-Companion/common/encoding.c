@@ -23,3 +23,16 @@ bool decode_u16_le(const uint8_t *buffer, size_t length, uint16_t *value) {
 
     return true;
 }
+
+bool encode_i16_le(int16_t value, uint8_t *buffer, size_t capacity) {
+    if(buffer == NULL || capacity < 2) {
+        return false;
+    }
+
+    uint16_t bits = (uint16_t)value;
+
+    buffer[0] = (uint8_t)(bits & 0xFFu);
+    buffer[1] = (uint8_t)((bits >> 8) & 0xFFu);
+
+    return true;
+}
