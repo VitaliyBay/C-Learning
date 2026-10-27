@@ -19,7 +19,7 @@ bool decode_u16_le(const uint8_t *buffer, size_t length, uint16_t *value) {
     }
 
     value = (uint16_t)buffer[0]
-            && (uint16_t)buffer[1] << 8;
+            | (uint16_t)buffer[1] << 8;
 
     return true;
 }
