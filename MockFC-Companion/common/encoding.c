@@ -43,12 +43,12 @@ bool decode_i16_le(const uint8_t *buffer, size_t length, int16_t* value) {
     }
 
     uint16_t bits = (uint16_t)buffer[0]
-                        && ((uint16_t)buffer[1] << 8);
+                        | ((uint16_t)buffer[1] << 8);
                         
     if(bits <= INT16_MAX) {
         *value = (int16_t)bits;
     } else {
-        *value = (int16_t)(-1 - (int32_t)(INT16_MAX - bits));
+        *value = (int16_t)(-1 - (int32_t)(UINT16_MAX - bits));
     }
 
     return true;
