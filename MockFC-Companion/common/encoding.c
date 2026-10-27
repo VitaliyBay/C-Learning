@@ -79,3 +79,18 @@ bool decode_u32_le(const uint8_t *buffer, size_t length, uint32_t *value) {
 
     return true;
 }
+
+bool encode_i32_le(int32_t value, uint8_t *buffer, size_t capacity) {
+    if(buffer == NULL || capacity < 4) {
+        return false;
+    }
+
+    uint32_t bits = (uint32_t)value;
+
+    buffer[0] = (uint8_t)(bits & 0xFFu);
+    buffer[1] = (uint8_t)((bits >> 8) & 0xFFu);
+    buffer[2] = (uint8_t)((bits >> 16) & 0xFFu);
+    buffer[3] = (uint8_t)((bits >> 24) & 0xFFu);
+    
+    return true;
+}
