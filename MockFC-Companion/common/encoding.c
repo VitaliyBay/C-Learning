@@ -94,3 +94,22 @@ bool encode_i32_le(int32_t value, uint8_t *buffer, size_t capacity) {
     
     return true;
 }
+
+bool decode_i32_le(const uint8_t *buffer, size_t length, int32_t *value) {
+    if(buffer == NULL || value == NULL || length < 4) {
+        return false;
+    }
+
+    uint32_t bits = (uint32_t)buffer[0]
+                        | ((uint32_t)buffer[1] << 8)
+                        | ((uint32_t)buffer[2] << 16)
+                        | ((uint32_t)buffer[3] << 24);
+
+    if(bits <= INT32_MAX) {
+        *value = (int32_t)bits;
+    } else {
+        *value = (int32_t)(-1 - (int64_t)(UINT32_MAX - bits));
+    }
+
+    return true;
+}
