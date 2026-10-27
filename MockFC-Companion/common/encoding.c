@@ -36,3 +36,20 @@ bool encode_i16_le(int16_t value, uint8_t *buffer, size_t capacity) {
 
     return true;
 }
+
+bool decode_i16_le(const uint8_t *buffer, size_t length, int16_t* value) {
+    if(buffer == NULL || value == NULL || length < 2) {
+        return false;
+    }
+
+    uint16_t bits = (uint16_t)buffer[0]
+                        && ((uint16_t)buffer[1] << 8);
+                        
+    if(bits <= INT16_MAX) {
+        *value = (int16_t)bits;
+    } else {
+        *value = (int16_t)(-1 - (int32_t)(INT16_MAX - bits));
+    }
+
+    return true;
+}
