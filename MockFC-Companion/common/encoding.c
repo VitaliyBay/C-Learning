@@ -18,7 +18,7 @@ bool decode_u16_le(const uint8_t *buffer, size_t length, uint16_t *value) {
         return false;
     }
 
-    value = (uint16_t)buffer[0]
+    *value = (uint16_t)buffer[0]
             | (uint16_t)buffer[1] << 8;
 
     return true;
@@ -72,7 +72,7 @@ bool decode_u32_le(const uint8_t *buffer, size_t length, uint32_t *value) {
         return false;
     }
 
-    value = (uint32_t)buffer[0] 
+    *value = (uint32_t)buffer[0] 
                 | ((uint32_t)buffer[1] << 8)
                 | ((uint32_t)buffer[2] << 16)
                 | ((uint32_t)buffer[3] << 24);
