@@ -1,0 +1,4 @@
+#ifndef TELEMETRY_CODEC_H
+#define TELEMETRY_CODEC_H
+
+#endif // TELEMETRY_CODEC_H
