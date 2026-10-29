@@ -8,7 +8,7 @@ bool encode_u16_le(uint16_t value, uint8_t *buffer, size_t capacity) {
     }
 
     buffer[0] = (uint8_t)(value & 0xFFu);
-    buffer[1] = (uint8_t)((value >> 8) && 0xFFu);
+    buffer[1] = (uint8_t)((value >> 8) & 0xFFu);
 
     return true;
 }
