@@ -237,6 +237,52 @@ void test_encode_i32_le_returns_true_and_data_encoded_corectly() {
     assert(buffer[3] == 0x7F);
 }
 
+// decode_i32_le
+void test_decode_i32_le_return_false_when_buffer_is_null() {
+    int32_t value = 0;
+
+    bool is_succeeded = decode_i32_le(NULL, sizeof(int32_t), &value);
+
+    assert(is_succeeded == false);
+}
+
+void test_decode_i32_le_returns_false_when_buffer_size_is_lower_than_4() {
+    uint8_t buffer[3];
+    int32_t value = 0;
+
+    bool is_succeeded = decode_i32_le(buffer, sizeof(buffer), &value);
+
+    assert(is_succeeded == false);
+}
+
+void test_decode_i32_le_return_false_when_value_is_null() {
+    uint8_t buffer[2];
+
+    bool is_succeeded = decode_i32_le(buffer, sizeof(buffer), NULL);
+
+    assert(is_succeeded == false);
+}
+
+void test_decode_i32_le_returns_true_and_data_decoded_corectly() {
+    uint8_t buffer[4] = { 0xFF, 0xFF, 0xFF, 0x7F };
+    int32_t value = 0;
+
+    bool is_succeeded = decode_i32_le(buffer, sizeof(buffer), &value);
+
+    assert(is_succeeded == true);
+    assert(value == 0x7FFFFFFF);
+}
+
+void test_decode_i32_le_returns_true_and_data_decoded_corectly_when_buffer_is_bigger_than_int16_max() {
+    uint8_t buffer[4] = { 0xFE, 0xFF, 0xFF, 0xFF };
+    int32_t value = 0;
+
+    bool is_succeeded = decode_i32_le(buffer, sizeof(buffer), &value);
+
+    assert(is_succeeded == true);
+    assert(value == -2);
+}
+
 int main() {
     // encode_u16_le
     test_encode_u16_le_returns_false_when_buffer_is_null();
@@ -266,7 +312,7 @@ int main() {
     test_encode_u32_le_returns_false_when_buffer_size_is_lower_than_4();
     test_encode_u32_le_returns_true_and_data_encoded_corectly();
 
-    // decode_32_le
+    // decode_u32_le
     test_decode_u32_le_return_false_when_buffer_is_null();
     test_decode_u32_le_returns_false_when_buffer_size_is_lower_than_4();
     test_decode_u32_le_return_false_when_value_is_null();
@@ -276,6 +322,12 @@ int main() {
     test_encode_i32_le_returns_false_when_buffer_size_is_lower_than_4();
     test_encode_i32_le_returns_true_and_data_encoded_corectly();
     test_encode_i32_le_returns_false_when_buffer_is_null();
+
+    // decode_i32_le
+    test_decode_i32_le_return_false_when_buffer_is_null();
+    test_decode_i32_le_returns_false_when_buffer_size_is_lower_than_4();
+    test_decode_i32_le_return_false_when_value_is_null();
+    test_decode_i32_le_returns_true_and_data_decoded_corectly();
 
     printf("[Test Encoding] All tests passed!\n");
 
