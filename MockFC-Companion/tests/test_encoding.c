@@ -213,17 +213,17 @@ int main() {
     test_decode_u16_le_return_false_when_value_is_null();
     test_decode_u16_le_returns_true_and_data_decoded_corectly();
 
+    // encode_i16_le
+    test_encode_i16_le_returns_false_when_buffer_is_null();
+    test_encode_i16_le_returns_false_when_buffer_size_is_lower_than_2();
+    test_encode_i16_le_returns_true_and_data_encoded_corectly();
+
     // decode_i16_le
     test_decode_i16_le_return_false_when_buffer_is_null();
     test_decode_i16_le_returns_false_when_buffer_size_is_lower_than_2();
     test_decode_i16_le_return_false_when_value_is_null();
     test_decode_i16_le_returns_true_and_data_decoded_corectly();
     test_decode_i16_le_returns_true_and_data_decoded_corectly_when_buffer_is_bigger_than_int16_max();
-
-    // encode_i16_le
-    test_encode_i16_le_returns_false_when_buffer_is_null();
-    test_encode_i16_le_returns_false_when_buffer_size_is_lower_than_2();
-    test_encode_i16_le_returns_true_and_data_encoded_corectly();
 
     // encode_u32_le
     test_encode_u32_le_returns_false_when_buffer_is_null();
