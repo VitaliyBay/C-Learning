@@ -131,6 +131,16 @@ void test_decode_i16_le_returns_true_and_data_decoded_corectly() {
     assert(value == 0x1234);
 }
 
+void test_decode_i16_le_returns_true_and_data_decoded_corectly_when_buffer_is_bigger_than_int16_max() {
+    uint8_t buffer[2] = { 0xFE, 0xFF };
+    int16_t value = 0;
+
+    bool is_succeeded = decode_i16_le(buffer, sizeof(buffer), &value);
+
+    assert(is_succeeded == true);
+    assert(value == -2);
+}
+
 // encode_u32_le
 void test_encode_u32_le_returns_false_when_buffer_is_null() {
     uint16_t value = 100;
@@ -208,8 +218,9 @@ int main() {
     test_decode_i16_le_returns_false_when_buffer_size_is_lower_than_2();
     test_decode_i16_le_return_false_when_value_is_null();
     test_decode_i16_le_returns_true_and_data_decoded_corectly();
+    test_decode_i16_le_returns_true_and_data_decoded_corectly_when_buffer_is_bigger_than_int16_max();
 
-    // encode_16_le
+    // encode_i16_le
     test_encode_i16_le_returns_false_when_buffer_is_null();
     test_encode_i16_le_returns_false_when_buffer_size_is_lower_than_2();
     test_encode_i16_le_returns_true_and_data_encoded_corectly();
