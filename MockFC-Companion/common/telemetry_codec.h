@@ -10,6 +10,6 @@
 
 bool encode_attitude(Attitude attitude, uint8_t *buffer, size_t capacity);
 
-bool decode_attitude(int8_t *buffer, size_t length, Attitude *value);
+bool decode_attitude(uint8_t *buffer, size_t length, Attitude *value);
 
 #endif // TELEMETRY_CODEC_H
