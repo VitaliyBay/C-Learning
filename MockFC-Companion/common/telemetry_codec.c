@@ -1,14 +1,15 @@
-#include "telemetry_codec.h"
-#include "encoding.h"
 #include <stdbool.h>
 #include <math.h>
+
+#include "encoding.h"
+#include "telemetry_codec.h"
 
 bool encode_attitude(Attitude value, uint8_t *buffer, size_t capacity) {
     if(buffer == NULL || capacity < ATTITUDE_BEFFER_SIZE) {
         return false;
     }
     
-    int8_t yaw_buffer[2];
+    uint8_t yaw_buffer[2];
     float scaled_yaw = roundf(value.yaw_deg * 10.0f);
     bool is_yaw_encodded = encode_i16_le((int16_t)scaled_yaw, yaw_buffer, sizeof(yaw_buffer));
 
@@ -16,7 +17,7 @@ bool encode_attitude(Attitude value, uint8_t *buffer, size_t capacity) {
         return false;
     }
 
-    int8_t pitch_buffer[2];
+    uint8_t pitch_buffer[2];
     float scaled_pitch = roundf(value.pitch_deg * 10.0f);
     bool is_pitch_encodded = encode_i16_le((int16_t)scaled_pitch, pitch_buffer, sizeof(pitch_buffer));
 
@@ -25,7 +26,7 @@ bool encode_attitude(Attitude value, uint8_t *buffer, size_t capacity) {
     }
 
     
-    int8_t roll_buffer[2];
+    uint8_t roll_buffer[2];
     float scaled_roll = roundf(value.roll_deg * 10.0f);
     bool is_roll_encodded = encode_i16_le((int16_t)scaled_roll, roll_buffer, sizeof(roll_buffer));
 
