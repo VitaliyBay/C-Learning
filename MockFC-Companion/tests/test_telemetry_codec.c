@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <assert.h>
+#include <math.h>
 
 // encode_attitude
 void test_encode_attitude_should_return_false_when_buffer_is_null() {
@@ -51,11 +52,42 @@ void test_encode_attitude_should_return_true_when_data_are_valid() {
     assert(buffer[5] == 0x00);
 }
 
+// decode_attitude
+void test_decode_attitude_return_false_when_buffer_is_null() {
+    Attitude attitude;
+
+    bool is_attitude_decoded = decode_attitude(NULL, sizeof(int16_t), &attitude);
+
+    assert(is_attitude_decoded == false);
+}
+
+void test_decode_attitude_return_false_when_value_is_null() {
+    uint8_t buffer[6];
+
+    bool is_attitude_decoded = decode_attitude(buffer, sizeof(buffer), NULL);
+
+    assert(is_attitude_decoded == false);
+}
+
+void test_decode_attitude_return_false_when_buffer_length_is_lower_than_6() {
+    uint8_t buffer[5];
+    Attitude attitude;
+
+    bool is_attitude_decoded = decode_attitude(buffer, sizeof(buffer), &attitude);
+
+    assert(is_attitude_decoded == false);
+}
+
 int main() {
     // encode_attitude
     test_encode_attitude_should_return_false_when_buffer_is_null();
     test_encode_attitude_should_return_false_when_buffer_capacity_is_lower_than_6();
     test_encode_attitude_should_return_true_when_data_are_valid();
+
+    // decode_attitude
+    test_decode_attitude_return_false_when_buffer_is_null();
+    test_decode_attitude_return_false_when_value_is_null();
+    test_decode_attitude_return_false_when_buffer_length_is_lower_than_6();
 
     printf("[TELEMETRY CODEC] All tests passed!!!\n");
 
