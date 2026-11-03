@@ -49,5 +49,32 @@ bool decode_attitude(uint8_t *buffer, size_t length, Attitude *value) {
         return false;
     }
 
+    int16_t yaw_value;
+    uint8_t yaw_buffer[2] = { buffer[0], buffer[1] };
+    bool is_yaw_decoded = decode_i16_le(yaw_buffer, sizeof(yaw_buffer), &yaw_value);
+    if(!is_yaw_decoded) {
+        return false;
+    }
+
+    value->yaw_deg =  roundf(yaw_value / 10);
+
+    int16_t pitch_value;
+    uint8_t pitch_buffer[2] = { buffer[2], buffer[3] };
+    bool is_pitch_decoded = decode_i16_le(pitch_buffer, sizeof(pitch_buffer), &pitch_value);
+    if(!is_pitch_decoded) {
+        return false;
+    }
+
+    value->pitch_deg = roundf(pitch_value / 10);
+
+    int16_t roll_value;
+    uint8_t roll_buffer[2] = { buffer[4], buffer[5] };
+    bool is_roll_decoded = decode_i16_le(roll_buffer, sizeof(roll_buffer), &roll_value);
+    if(!is_roll_decoded) {
+        return false;
+    }
+
+    value->roll_deg = roundf(roll_value / 10);
+
     return true;
 }
