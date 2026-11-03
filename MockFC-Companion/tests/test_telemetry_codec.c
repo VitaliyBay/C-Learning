@@ -32,7 +32,6 @@ void test_encode_attitude_should_return_false_when_buffer_capacity_is_lower_than
     assert(is_attitude_encoded == false);
 }
 
-
 void test_encode_attitude_should_return_true_when_data_are_valid() {
     uint8_t buffer[6];
     Attitude attitude = {
@@ -44,11 +43,11 @@ void test_encode_attitude_should_return_true_when_data_are_valid() {
     bool is_attitude_encoded = encode_attitude(attitude, buffer, sizeof(buffer));
 
     assert(is_attitude_encoded == true);
-    assert(buffer[0] == 0x82);
+    assert(buffer[0] == 0x82); // 130 le -> yaw
     assert(buffer[1] == 0x00);
-    assert(buffer[2] == 0x78);
+    assert(buffer[2] == 0x78); // 120 le -> pitch
     assert(buffer[3] == 0x00);
-    assert(buffer[4] == 0x6E);
+    assert(buffer[4] == 0x6E); // 110 le -> roll
     assert(buffer[5] == 0x00);
 }
 
@@ -77,7 +76,6 @@ void test_decode_attitude_return_false_when_buffer_length_is_lower_than_6() {
 
     assert(is_attitude_decoded == false);
 }
-
 
 void test_decode_attitude_return_decode_attitude_when_data_are_valid() {
     uint8_t buffer[6] = {
