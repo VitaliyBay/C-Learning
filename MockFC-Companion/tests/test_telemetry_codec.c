@@ -78,6 +78,23 @@ void test_decode_attitude_return_false_when_buffer_length_is_lower_than_6() {
     assert(is_attitude_decoded == false);
 }
 
+
+void test_decode_attitude_return_decode_attitude_when_data_are_valid() {
+    uint8_t buffer[6] = {
+        0x82, 0x00, // 130 le -> yaw
+        0x78, 0x00, // 120 le -> pitch
+        0x6E, 0x00 // 110 le -> roll
+    };
+    Attitude attitude;
+
+    bool is_attitude_decoded = decode_attitude(buffer, sizeof(buffer), &attitude);
+
+    assert(is_attitude_decoded == true);
+    assert(attitude.yaw_deg == 13.0 && "Yaw deg is valid");
+    assert(attitude.pitch_deg == 12.0 && "Pitch deg is valid");
+    assert(attitude.roll_deg == 11.0 && "Roll deg is valid");
+}
+
 int main() {
     // encode_attitude
     test_encode_attitude_should_return_false_when_buffer_is_null();
@@ -88,6 +105,7 @@ int main() {
     test_decode_attitude_return_false_when_buffer_is_null();
     test_decode_attitude_return_false_when_value_is_null();
     test_decode_attitude_return_false_when_buffer_length_is_lower_than_6();
+    test_decode_attitude_return_decode_attitude_when_data_are_valid();
 
     printf("[TELEMETRY CODEC] All tests passed!!!\n");
 
