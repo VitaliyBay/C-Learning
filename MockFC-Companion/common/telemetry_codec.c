@@ -43,3 +43,11 @@ bool encode_attitude(Attitude value, uint8_t *buffer, size_t capacity) {
 
     return true;
 }
+
+bool decode_attitude(uint8_t *buffer, size_t length, Attitude *value) {
+    if(buffer == NULL || value == NULL || length < ATTITUDE_BEFFER_SIZE) {
+        return false;
+    }
+
+    return true;
+}
