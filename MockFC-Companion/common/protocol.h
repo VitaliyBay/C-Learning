@@ -27,4 +27,6 @@ typedef struct {
     uint8_t checksum;
 } ProtocolParser;
 
+bool protocol_parser_ingest(ProtocolParser *parser, uint8_t byte, ProtocolFrame *out_frame);
+
 #endif // PROTOCOL_H
