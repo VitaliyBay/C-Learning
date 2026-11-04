@@ -2,6 +2,7 @@
 #define PROTOCOL_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define PROTOCOL_SYNC 0x24
 #define PROTOCOL_MAX_PAYLOAD 64
