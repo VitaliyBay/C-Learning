@@ -30,4 +30,6 @@ typedef struct {
 
 bool protocol_parser_ingest(ProtocolParser *parser, uint8_t byte, ProtocolFrame *out_frame);
 
+void protocol_parser_init(ProtocolParser *parser);
+
 #endif // PROTOCOL_H
