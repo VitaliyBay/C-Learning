@@ -16,5 +16,53 @@ void protocol_parser_init(ProtocolParser *parser) {
 }
 
 bool protocol_parser_ingest(ProtocolParser *parser, uint8_t byte, ProtocolFrame *out_frame) {
-    return false;
+    if(parser == NULL || out_frame == NULL) {
+        return false;
+    }
+
+    switch (parser->state)
+    {
+    case WAIT_SYNC:
+        if(byte == PROTOCOL_SYNC) {
+            parser->state = READ_CMD;
+        }
+        break;
+    
+    case READ_CMD:
+        parser->frame.cmd = byte;
+        parser->checksum = byte;
+        parser->state = READ_LENGTH;
+        break;
+
+    case READ_LENGTH:
+        if(byte > PROTOCOL_MAX_PAYLOAD) {
+            protocol_parser_init(parser);
+            break;
+        }
+
+        parser->frame.length = byte;
+        parser->checksum ^= byte;
+        parser->payload_index = 0;
+
+        if(byte == 0) {
+            parser->state = READ_CHECKSUM;
+        } else {
+            parser->state = READ_PAYLOAD;
+        }
+        break;
+
+    case READ_PAYLOAD:
+        parser->frame.payload[parser->payload_index] = byte;
+        parser->checksum ^= byte;
+        parser->payload_index++;
+
+        if(parser->payload_index >= parser->frame.length) {
+            parser->state = READ_CHECKSUM;
+        }
+
+        break;
+    
+    default:
+        break;
+    }
 }
