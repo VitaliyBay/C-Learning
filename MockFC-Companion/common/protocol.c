@@ -61,8 +61,20 @@ bool protocol_parser_ingest(ProtocolParser *parser, uint8_t byte, ProtocolFrame 
         }
 
         break;
-    
+
+    case READ_CHECKSUM:
+        if(byte == parser->checksum) {
+            *out_frame = parser->frame;
+            protocol_parser_init(parser);
+            return true;
+        }    
+
+        protocol_parser_init(parser);
+        break;
     default:
+        protocol_parser_init(parser);
         break;
     }
+
+    return false;
 }
