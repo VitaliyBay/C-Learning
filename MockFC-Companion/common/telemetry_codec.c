@@ -5,7 +5,7 @@
 #include "telemetry_codec.h"
 
 bool encode_attitude(Attitude value, uint8_t *buffer, size_t capacity) {
-    if(buffer == NULL || capacity < ATTITUDE_BEFFER_SIZE) {
+    if(buffer == NULL || capacity < ATTITUDE_BUFFER_SIZE) {
         return false;
     }
     
@@ -45,7 +45,7 @@ bool encode_attitude(Attitude value, uint8_t *buffer, size_t capacity) {
 }
 
 bool decode_attitude(uint8_t *buffer, size_t length, Attitude *value) {
-    if(buffer == NULL || value == NULL || length < ATTITUDE_BEFFER_SIZE) {
+    if(buffer == NULL || value == NULL || length < ATTITUDE_BUFFER_SIZE) {
         return false;
     }
 

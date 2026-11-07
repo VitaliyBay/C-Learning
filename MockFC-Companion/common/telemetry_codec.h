@@ -1,7 +1,7 @@
 #ifndef TELEMETRY_CODEC_H
 #define TELEMETRY_CODEC_H
 
-#define ATTITUDE_BEFFER_SIZE 6
+#define ATTITUDE_BUFFER_SIZE 6
 
 #include "types.h"
 #include <stdint.h>
