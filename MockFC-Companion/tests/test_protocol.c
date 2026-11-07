@@ -98,6 +98,34 @@ void test_protocol_parser_ingest_oversize_payload_length() {
     assert(parser.state == WAIT_SYNC);
 }
 
+void test_protocol_parser_ingest_two_frames_in_strem() {
+    ProtocolParser parser;
+    ProtocolFrame frame;
+
+    protocol_parser_init(&parser);
+
+    uint8_t input[] = {
+        0x24,   // SYNC 1
+        0x01,   // CMD 1
+        0x00,   // LENGTH 1
+        0x01,   // CHECKSUM 1
+        // ----------------------
+        0x24,   // SYNC 2
+        0x02,   // CMD 2
+        0x00,   // LENGTH 2
+        0x02,   // CHECKSUM 2     
+    };
+
+    int completed_frame_count = 0;
+    for(size_t i = 0; i < sizeof(input); i++) {
+        if(protocol_parser_ingest(&parser, input[i], &frame)) {
+            completed_frame_count++;
+        }
+    }
+
+    assert(completed_frame_count == 2);
+}
+
 int main() {
     // protocol_parser_init
     test_protocol_parser_init_returns_valid_parser_state();
@@ -106,6 +134,7 @@ int main() {
     test_protocol_parser_ingest_when_valid_frame();
     test_protocol_parser_ingest_skip_noise_bytes();
     test_protocol_parser_ingest_oversize_payload_length();
+    test_protocol_parser_ingest_two_frames_in_strem();
 
     printf("[PROTOCOL] All test passed!");
     
