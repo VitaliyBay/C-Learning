@@ -126,6 +126,32 @@ void test_protocol_parser_ingest_two_frames_in_strem() {
     assert(completed_frame_count == 2);
 }
 
+void test_protocol_parser_ingest_maximum_payload() {
+    ProtocolParser parser;
+    ProtocolFrame frame;
+
+    protocol_parser_init(&parser);
+
+    assert(protocol_parser_ingest(&parser, PROTOCOL_SYNC, &frame) == false);
+    assert(protocol_parser_ingest(&parser, 0x01, &frame) == false);
+    assert(protocol_parser_ingest(&parser, PROTOCOL_MAX_PAYLOAD, &frame) == false);
+
+    uint8_t checksum = 0x01 ^ PROTOCOL_MAX_PAYLOAD;
+
+    for(size_t i = 0; i < PROTOCOL_MAX_PAYLOAD; i++) {
+        checksum ^= i;
+        assert(protocol_parser_ingest(&parser, i, &frame) == false);
+    }
+
+    assert(protocol_parser_ingest(&parser, checksum, &frame) == true);
+    
+    assert(frame.cmd == 0x01);
+    assert(frame.length == PROTOCOL_MAX_PAYLOAD);
+    assert(frame.payload[0] == 0);
+    assert(frame.payload[32] == 32);
+    assert(frame.payload[63] == 63);
+}
+
 int main() {
     // protocol_parser_init
     test_protocol_parser_init_returns_valid_parser_state();
@@ -135,6 +161,7 @@ int main() {
     test_protocol_parser_ingest_skip_noise_bytes();
     test_protocol_parser_ingest_oversize_payload_length();
     test_protocol_parser_ingest_two_frames_in_strem();
+    test_protocol_parser_ingest_maximum_payload();
 
     printf("[PROTOCOL] All test passed!");
     
