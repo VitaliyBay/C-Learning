@@ -20,6 +20,12 @@ SRC_TELEMETRY_CODEC = test_telemetry_codec.c ../common/telemetry_codec.c ../comm
 
 OBJ_TELEMETRY_CODEC = $(SRC_TELEMETRY_CODEC:.c=.o)
 
+TARGET_PROTOCOL = test_protocol
+
+SRC_PROTOCOL = test_protocol.c ../common/protocol.c
+
+OBJ_PROTOCOL = $(SRC_PROTOCOL:.c=.o)
+
 all: run
 
 $(TARGET): $(OBJ)
@@ -29,20 +35,28 @@ $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET) $(OBJ_ENCODING) $(TARGET_ENCODING) $(OBJ_TELEMETRY_CODEC) $(TARGET_TELEMETRY_CODEC)
+	rm -f $(OBJ) $(TARGET) $(OBJ_ENCODING) $(TARGET_ENCODING) $(OBJ_TELEMETRY_CODEC) $(TARGET_TELEMETRY_CODEC) $(OBJ_PROTOCOL) $(TARGET_PROTOCOL)
 
 run: $(TARGET)
 	./$(TARGET)
 
+# Encoding
 $(TARGET_ENCODING): $(OBJ_ENCODING)
 	$(CC) $(OBJ_ENCODING) -o $(TARGET_ENCODING)
 
 encoding: $(TARGET_ENCODING)
 	./$(TARGET_ENCODING) 
 
-
+# Telemetry
 $(TARGET_TELEMETRY_CODEC): $(OBJ_TELEMETRY_CODEC)
 	$(CC) $(OBJ_TELEMETRY_CODEC) -lm -o $(TARGET_TELEMETRY_CODEC)
 
 telemetry_codec: $(TARGET_TELEMETRY_CODEC)
 	./$(TARGET_TELEMETRY_CODEC) 
+
+# Protocol
+$(TARGET_PROTOCOL): $(OBJ_PROTOCOL)
+	$(CC) $(OBJ_PROTOCOL) -lm -o $(TARGET_PROTOCOL)
+
+protocol: $(TARGET_PROTOCOL)
+	./$(TARGET_PROTOCOL) 
