@@ -98,19 +98,31 @@ For code reviews, list findings **most severe first**, with file and line refere
 
 ## 7. Progress tracker (owner may update)
 
-Mark topics as they are completed and understood. Update this list when the owner says a topic is done.
+Legend: `[x]` demonstrated in the repo, `[~]` partly covered, `[ ]` not started. Status is based on the repo's commit history and code as of 2026-11-10, not on tests of understanding. Update this list when the owner says a topic is done, or when new work in the repo shows progress.
 
-- [ ] C fundamentals (pointers, structs, arrays, strings)
-- [ ] Bit manipulation and `<stdint.h>` types
-- [ ] Memory and buffer safety
-- [ ] Undefined behavior and portability
-- [ ] Modular design, headers, include guards
-- [ ] Unit testing on the PC
+- [~] C fundamentals (pointers, structs, arrays, strings)
+  - Structs, arrays, and `uint8_t *` parameters are used throughout. Missing: pointer arithmetic, function pointers, dynamic memory.
+- [x] Bit manipulation and `<stdint.h>` types
+  - `BitFlags`, `Monitoring` warning flags, and `encoding.c` shifts and masks.
+- [~] Memory and buffer safety
+  - Length checks in `encoding.c` and the protocol parser. No `malloc`/`free` yet.
+- [~] Undefined behavior and portability
+  - Fixed-width types are used. Not yet covered: signed overflow, strict aliasing, packed structs.
+- [x] Modular design, headers, include guards
+  - Consistent header/source split with include guards across projects.
+- [x] Unit testing on the PC
+  - Assert-based tests in `tests/` for validations, clock, scenario, protocol, encoding, and telemetry codec.
 - [ ] `volatile`, registers, ISRs
-- [ ] Communication protocols and frame parsing
-- [ ] Checksums and CRC
-- [ ] Sensor data and filters
+  - The ESP32 project uses the Arduino `HardwareSerial` API, not registers or interrupts.
+- [x] Communication protocols and frame parsing
+  - Byte-stream state machine in `protocol_parser_ingest`, with tests for valid, oversize, and two-frame streams.
+- [~] Checksums and CRC
+  - XOR checksums only. CRC not started.
+- [~] Sensor data and filters
+  - Threshold-based warnings and float interpolation in `battery.c`. No filters yet.
 - [ ] PID control
-- [ ] Flight mode state machines and failsafe
-- [ ] MSP / CRSF / DShot basics
+- [~] Flight mode state machines and failsafe
+  - `get_flight_state` in `Monitoring`; `Flight Mode Manager` has transition validation and logging, but `flight-mode-manager.c` is empty.
+- [~] MSP / CRSF / DShot basics
+  - MSP v1 request and response parsing in `ESP32-MSP`. No CRSF or DShot yet.
 - [ ] RTOS basics
