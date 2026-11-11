@@ -153,7 +153,7 @@ static void test_attitude_valid_yaw_deg_with_invalid_positive_value() {
     Attitude attitude_with_invalid_positive_value = {
         .roll_deg = 0,
         .pitch_deg = 0,
-        .yaw_deg = 361
+        .yaw_deg = 360
     };
 
     assert(attitude_valid(attitude_with_invalid_positive_value) == false);
