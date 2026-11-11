@@ -23,6 +23,27 @@ static void test_gps_coordinates_valid_with_latitude_deg_valid() {
     assert(gps_coordinates_valid(latitude_deg, longitude_deg) == true);
 }
 
+static void test_gps_coordinates_valid_with_longitude_greater_that_180() {
+    double latitude_deg = 15;
+    double longitude_deg = 181;
+
+    assert(gps_coordinates_valid(latitude_deg, longitude_deg) == false);
+}
+
+static void test_gps_coordinates_valid_with_longitude_lower_than_180() {
+    double latitude_deg = 15;
+    double longitude_deg = -181;
+
+    assert(gps_coordinates_valid(latitude_deg, longitude_deg) == false);
+}
+
+static void test_gps_coordinates_valid_with_valid_longitude() {
+    double latitude_deg = 15;
+    double longitude_deg = -180;
+
+    assert(gps_coordinates_valid(latitude_deg, longitude_deg) == true);
+}
+
 static void test_rc_value_valid_with_value_lower_than_1000() {
     uint16_t value = 999;
 
@@ -154,6 +175,10 @@ int main(void) {
     test_gps_coordinates_valid_with_latitude_deg_greater_that_90();
     test_gps_coordinates_valid_with_latitude_deg_valid();
 
+    test_gps_coordinates_valid_with_longitude_greater_that_180();
+    test_gps_coordinates_valid_with_longitude_lower_than_180();
+    test_gps_coordinates_valid_with_valid_longitude();
+
     // rc_value_valid
     test_rc_value_valid_with_value_lower_than_1000();
     test_rc_value_valid_with_value_greater_than_2000();
@@ -178,7 +203,7 @@ int main(void) {
     test_battery_voltage_valid_with_value_greater_than_30();
     test_battery_voltage_valid_with_correct_value();
 
-    printf("All tests passed!\n");
+    printf("[VALIDATIONS] All tests passed!\n");
 
     return 0;
 }
