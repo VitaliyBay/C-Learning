@@ -41,7 +41,7 @@ bool attitude_valid(Attitude attitude) {
         return false;
     }
 
-    if(attitude.yaw_deg < 0 || attitude.yaw_deg > 360) {
+    if(attitude.yaw_deg < 0 || attitude.yaw_deg >= 360) { // this is half-open interval [0, 360). It is not closed interval [0, 360] where ends included
         return false;
     }
 
