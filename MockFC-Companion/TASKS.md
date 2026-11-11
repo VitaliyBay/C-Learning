@@ -13,9 +13,9 @@ Status legend: `[ ]` not done, `[x]` done.
 
 ## Phase 1 — Build and small validation fixes
 
-- [ ] **Task 01 — Fix the `mockFC/tests` build**
-- [ ] **Task 02 — Longitude range check**
-- [ ] **Task 03 — Yaw range is half-open `[0, 360)`**
+- [X] **Task 01 — Fix the `mockFC/tests` build**
+- [X] **Task 02 — Longitude range check**
+- [X] **Task 03 — Yaw range is half-open `[0, 360)`**
 
 ## Phase 2 — Data model cleanup
 
