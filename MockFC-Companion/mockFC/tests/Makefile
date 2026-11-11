@@ -8,16 +8,16 @@ SRC_SCENARIO = test_scenario.c ../src/clock.c ../src/scenario.c ../src/sensors.c
 
 OBJ_SCENARIO = $(SRC_SCENARIO:.c=.o)
 
-TARGET = test_clock
+TARGET_CLOCK = test_clock
 
-SRC = test_clock.c test_scenario.c ../src/clock.c ../src/scenario.c ../src/sensors.c
+SRC_CLOCK = test_clock.c ../src/clock.c ../src/scenario.c ../src/sensors.c
 
-OBJ = $(SRC:.c=.o)
+OBJ_CLOCK = $(SRC_CLOCK:.c=.o)
 
-all: run
+all: clock scenario
 
-$(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET)
+$(TARGET_CLOCK): $(OBJ_CLOCK)
+	$(CC) $(OBJ_CLOCK) -o $(TARGET_CLOCK)
 
 $(TARGET_SCENARIO): $(OBJ_SCENARIO)
 	$(CC) $(OBJ_SCENARIO) -o $(TARGET_SCENARIO)
@@ -26,10 +26,10 @@ $(TARGET_SCENARIO): $(OBJ_SCENARIO)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET) $(OBJ_SCENARIO) $(TARGET_SCENARIO)
+	rm -f $(OBJ_CLOCK) $(TARGET_CLOCK) $(OBJ_SCENARIO) $(TARGET_SCENARIO)
 
-run: $(TARGET)
-	./$(TARGET)
+clock: $(TARGET_CLOCK)
+	./$(TARGET_CLOCK)
 
 scenario:  $(TARGET_SCENARIO)
 			./$(TARGET_SCENARIO)
