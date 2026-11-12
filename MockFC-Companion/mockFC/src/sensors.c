@@ -22,17 +22,17 @@ void sensors_init(SensorData *sensors_data)
         .accelerometer = {
             .x_dps = 0.0f,
             .y_dps = 0.0f,
-            .z_dps = 0.0f
+            .z_dps = 1.0f
         },
         .gps_data = {
             .fix_type = GPS_FIX_3D,
-            .satelites = 10,
-            .latitude_deg = 41.3851,
-            .longitude_deg = 2.1734,
-            .altitude_m = 100.0f
+            .satelites = 12,
+            .latitude_deg = 41.3874,
+            .longitude_deg = 2.1686,
+            .altitude_m = 35.0f
         },
         .battery_data = {
-            .voltage_v = 16.8f,
+            .voltage_v = 24.60f,
             .current_a = 0.0f,
             .consumed_mah = 0
         },
