@@ -7,7 +7,7 @@
 
 bool gps_coordinates_valid(double latitude_deg, double longitude_deg);
 bool rc_value_valid(uint16_t value);
-bool attitude_valid(Attitude altitude);
+bool attitude_valid(Attitude attitude);
 bool gps_satelites_valid(uint8_t satelites);
 bool battery_voltage_valid(float voltage);
 

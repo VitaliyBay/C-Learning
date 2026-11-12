@@ -55,7 +55,7 @@ typedef struct {
 } FlightStatus;
 
 typedef struct {
-    Attitude altitude;
+    Attitude attitude;
     Gyroscope gyroscope;
     Accelerometer accelerometer;
     GpsData gps_data;

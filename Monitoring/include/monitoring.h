@@ -18,7 +18,7 @@
 typedef struct {
     float battery_voltage;
     int gps_satellites;
-    float altitude;
+    float attitude;
     float roll;
     float pitch;
     int throttle;
