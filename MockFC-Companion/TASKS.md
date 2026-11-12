@@ -19,9 +19,9 @@ Status legend: `[ ]` not done, `[x]` done.
 
 ## Phase 2 — Data model cleanup
 
-- [ ] **Task 04 — Remove duplicate type definitions**
-- [ ] **Task 05 — Fix names and typos in the data model**
-- [ ] **Task 06 — Initialize mock sensors to the handbook values**
+- [X] **Task 04 — Remove duplicate type definitions**
+- [X] **Task 05 — Fix names and typos in the data model**
+- [X] **Task 06 — Initialize mock sensors to the handbook values**
 
 ## Phase 3 — Attitude codec correctness
 
@@ -116,14 +116,14 @@ Status legend: `[ ]` not done, `[x]` done.
 
 **What to do**
 1. In `common/types.h`:
-   - `Gyroscope.z_dpf` → `z_dps` (degrees per second, not "dpf").
+   - `Gyroscope.z_dps` → `z_dps` (degrees per second, not "dpf").
    - `Accelerometer` fields should be `x_g`, `y_g`, `z_g` (in g), not `_dps`.
    - `GpsData.satelites` → `satellites`.
-   - `DroneTelemetry.altitude` (which is an `Attitude`) → `attitude`.
+   - `DroneTelemetry.attitude` (which is an `Attitude`) → `attitude`.
 2. Fix every place that used the old names. The compiler will list them for you.
 3. Compare `DroneTelemetry` with the handbook's data model. Note what is still missing (`ImuData`, `altitude_relative_m`, `sample_time_ms`). **Do not add them yet.** Write the missing items in a comment at the top of `types.h` as a TODO list.
 
-**Explanation:** Good names carry units. `voltage_v` tells you the unit without reading the docs; `z_dpf` does not. In embedded code, a unit mistake (degrees vs. radians, volts vs. millivolts) is a common and dangerous bug. Let the compiler find all the call sites when you rename a field: change the header first, then fix each error it reports.
+**Explanation:** Good names carry units. `voltage_v` tells you the unit without reading the docs; `z_dps` does not. In embedded code, a unit mistake (degrees vs. radians, volts vs. millivolts) is a common and dangerous bug. Let the compiler find all the call sites when you rename a field: change the header first, then fix each error it reports.
 
 **Done when:** the build is clean with `-Wall -Wextra -Wpedantic`, and `grep` finds none of the old names in the project.
 
@@ -245,7 +245,7 @@ Read the "Timeline" and "Exact checkpoints" tabs of the handbook's Mock scenario
 
 **What to do**
 1. In `scenario_updates`, replace the single step at 15000 ms with a ramp for `5000 ≤ now < 15000`.
-2. Compute the altitude from elapsed time: `steps = (now - 5000) / 100` (integer division is correct here), then `altitude = steps * 0.1f`. Hold at 10.0 m from 15000 ms.
+2. Compute the attitude from elapsed time: `steps = (now - 5000) / 100` (integer division is correct here), then `attitude = steps * 0.1f`. Hold at 10.0 m from 15000 ms.
 3. Test: 5000 ms → 0.0 m, 10000 ms → 5.0 m, 14900 ms → 9.9 m, 15000 ms → 10.0 m.
 
 **Explanation:** Adding 0.1 on each tick looks simpler, but floating-point rounding accumulates and the value at 15000 ms may not be exactly 10.0. Computing the value from a whole number of steps is exact in the way that matters here. Integer division (`/` on two integers) is useful exactly when you want to discard the remainder, like counting completed 100 ms steps.
