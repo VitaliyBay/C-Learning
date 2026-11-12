@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include "sensors.h"
+#include "types.h"
 
 void sensors_init(SensorData *sensors_data)
 {
@@ -25,7 +26,7 @@ void sensors_init(SensorData *sensors_data)
         },
         .gps_data = {
             .fix_type = GPS_FIX_3D,
-            .satellites = 10,
+            .satelites = 10,
             .latitude_deg = 41.3851,
             .longitude_deg = 2.1734,
             .altitude_m = 100.0f
