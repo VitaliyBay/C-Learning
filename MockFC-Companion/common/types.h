@@ -25,13 +25,13 @@ typedef struct {
 typedef struct {
     float x_dps;
     float y_dps;
-    float z_dpf;
+    float z_dps;
 } Gyroscope;
 
 typedef struct {
     float x_dps;
     float y_dps;
-    float z_dpf;
+    float z_dps;
 } Accelerometer;
 
 typedef struct {

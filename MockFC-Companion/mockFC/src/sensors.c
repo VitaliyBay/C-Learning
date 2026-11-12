@@ -17,12 +17,12 @@ void sensors_init(SensorData *sensors_data)
         .gyroscope = {
             .x_dps = 0.0f,
             .y_dps = 0.0f,
-            .z_dpf = 0.0f
+            .z_dps = 0.0f
         },
         .accelerometer = {
             .x_dps = 0.0f,
             .y_dps = 0.0f,
-            .z_dpf = 0.0f
+            .z_dps = 0.0f
         },
         .gps_data = {
             .fix_type = GPS_FIX_3D,
