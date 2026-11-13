@@ -56,16 +56,12 @@ bool decode_attitude(uint8_t *buffer, size_t length, Attitude *value) {
         return false;
     }
 
-    value->yaw_deg =  yaw_value / 10;
-
     int16_t pitch_value;
     uint8_t pitch_buffer[2] = { buffer[2], buffer[3] };
     bool is_pitch_decoded = decode_i16_le(pitch_buffer, sizeof(pitch_buffer), &pitch_value);
     if(!is_pitch_decoded) {
         return false;
     }
-
-    value->pitch_deg = pitch_value / 10;
 
     int16_t roll_value;
     uint8_t roll_buffer[2] = { buffer[4], buffer[5] };
@@ -74,7 +70,9 @@ bool decode_attitude(uint8_t *buffer, size_t length, Attitude *value) {
         return false;
     }
 
-    value->roll_deg = roll_value / 10;
+    value->yaw_deg =  yaw_value / 10.0f;
+    value->pitch_deg = pitch_value / 10.0f;
+    value->roll_deg = roll_value / 10.0f;
 
     return true;
 }
