@@ -25,8 +25,8 @@ Status legend: `[ ]` not done, `[x]` done.
 
 ## Phase 3 — Attitude codec correctness
 
-- [ ] **Task 07 — Stop losing decimals when decoding**
-- [ ] **Task 08 — Reject out-of-range values when encoding**
+- [X] **Task 07 — Stop losing decimals when decoding**
+- [X] **Task 08 — Reject out-of-range values when encoding**
 - [ ] **Task 09 — Make decoding all-or-nothing**
 - [ ] **Task 10 — Decide and enforce the attitude byte order**
 
