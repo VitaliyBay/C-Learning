@@ -93,6 +93,22 @@ void test_decode_attitude_return_decode_attitude_when_data_are_valid() {
     assert(attitude.roll_deg == 11.0 && "Roll deg is valid");
 }
 
+void test_decode_attitude_return_decode_attitude_with_decimals_when_data_are_valid() {
+    uint8_t buffer[6] = {
+        0x7C, 0x00, // 124 le -> yaw
+        0xE0, 0xFF, // -32 le -> pitch
+        0x8E, 0x03 // 910 le -> roll
+    };
+    Attitude attitude;
+
+    bool is_attitude_decoded = decode_attitude(buffer, sizeof(buffer), &attitude);
+
+    assert(is_attitude_decoded == true);
+    assert(fabsf(attitude.yaw_deg - 12.4f) < 0.05f && "Yaw deg is valid");
+    assert(fabsf(attitude.pitch_deg - -3.2f) < 0.05f && "Pitch deg is valid");
+    assert(fabsf(attitude.roll_deg - 91.0f) < 0.05f && "Roll deg is valid");
+}
+
 int main() {
     // encode_attitude
     test_encode_attitude_should_return_false_when_buffer_is_null();
@@ -104,6 +120,7 @@ int main() {
     test_decode_attitude_return_false_when_value_is_null();
     test_decode_attitude_return_false_when_buffer_length_is_lower_than_6();
     test_decode_attitude_return_decode_attitude_when_data_are_valid();
+    test_decode_attitude_return_decode_attitude_with_decimals_when_data_are_valid();
 
     printf("[TELEMETRY CODEC] All tests passed!!!\n");
 
