@@ -27,8 +27,8 @@ Status legend: `[ ]` not done, `[x]` done.
 
 - [X] **Task 07 — Stop losing decimals when decoding**
 - [X] **Task 08 — Reject out-of-range values when encoding**
-- [ ] **Task 09 — Make decoding all-or-nothing**
-- [ ] **Task 10 — Decide and enforce the attitude byte order**
+- [X] **Task 09 — Make decoding all-or-nothing**
+- [X] **Task 10 — Decide and enforce the attitude byte order**
 
 ## Phase 4 — Scenario timeline
 
