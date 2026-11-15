@@ -20,7 +20,7 @@ void scenario_updates(ClockState *clock_state, SensorData *sensor_data) {
 
     if(clock_state->now_ms >= 37500) {
         sensor_data->gps_data.fix_type = GPS_FIX_NONE;
-        sensor_data->gps_data.satellites = 3;
+        sensor_data->gps_data.satelites = 3;
     }
 
     if(clock_state->now_ms >= 45000) {
