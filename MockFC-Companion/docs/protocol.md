@@ -25,7 +25,8 @@ In this protocol we have 5 components:
  Indicates number of payload bytes. It could be from 0 to 64
 
  ## PAYLOAD
- It is the data for the command (CMD). This component can be empty
+ It is the data for the command (CMD). This component can be empty.
+ Attitude is encoded in the next order: **yaw, pitch, roll**
 
  ## CHECKSUM
  A byte that is used to detect certain transmission erros. The checksum is the biwise XOR of CMD, SIZE and every payload byte. The SYNC byte is exluded.
