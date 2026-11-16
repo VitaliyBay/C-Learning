@@ -2,6 +2,8 @@
 #include "sensors.h"
 #include "types.h"
 
+const float BATTERY_START_V = 24.60f;
+
 void sensors_init(SensorData *sensors_data)
 {
     if (sensors_data == NULL) {
@@ -32,7 +34,7 @@ void sensors_init(SensorData *sensors_data)
             .altitude_m = 35.0f
         },
         .battery_data = {
-            .voltage_v = 24.60f,
+            .voltage_v = BATTERY_START_V,
             .current_a = 0.0f,
             .consumed_mah = 0
         },
