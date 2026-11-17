@@ -30,7 +30,7 @@ void sensors_init(SensorData *sensors_data)
             .satelites = 12,
             .latitude_deg = 41.3874,
             .longitude_deg = 2.1686,
-            .altitude_m = 35.0f
+            .altitude_m = 0.0f
         },
         .battery_data = {
             .voltage_v = BATTERY_START_V,
