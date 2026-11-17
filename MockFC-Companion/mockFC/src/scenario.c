@@ -8,6 +8,11 @@ void scenario_updates(ClockState *clock_state, SensorData *sensor_data) {
         return;
     }
 
+    if(clock_state->now_ms > 5000 && clock_state->now_ms < 15000) {
+        uint32_t steps = (clock_state->now_ms - 5000) / 100;
+        sensor_data->gps_data.altitude_m = steps * 0.1f;
+    }
+
     if(clock_state->now_ms >= 15000) {
         sensor_data->gps_data.altitude_m = 10;
     }
