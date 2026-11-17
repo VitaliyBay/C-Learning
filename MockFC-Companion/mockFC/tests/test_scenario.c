@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void test_scenario_updates_set_altitude_to_20_when_now_ms_time_is_15000() {
+void test_scenario_updates_set_altitude_to_10_when_now_ms_time_is_15000() {
     ClockState clock_state;
     SensorData sensor_data;
 
@@ -55,7 +55,7 @@ void test_scenario_updates_altitude_rise_by_0_1_every_100_ms_up_to_15000_ms() {
 }
 
 int main() {
-    test_scenario_updates_set_altitude_to_20_when_now_ms_time_is_15000();
+    test_scenario_updates_set_altitude_to_10_when_now_ms_time_is_15000();
     test_scenario_updates_altitude_rise_by_0_1_every_100_ms_up_to_15000_ms();
 
     printf("[TEST SCENARIO] All tests passed!");
