@@ -1,8 +1,7 @@
 #include <stddef.h>
 #include "sensors.h"
+#include "scenario.h"
 #include "types.h"
-
-const float BATTERY_START_V = 24.60f;
 
 void sensors_init(SensorData *sensors_data)
 {
