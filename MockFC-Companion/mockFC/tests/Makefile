@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -I../src
+CFLAGS = -std=c11 -Wall -Wextra -Werror -I../src -I../../common
 
 TARGET_SCENARIO = test_scenario
 
