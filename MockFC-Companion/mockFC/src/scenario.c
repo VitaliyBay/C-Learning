@@ -27,7 +27,6 @@ void scenario_updates(ClockState *clock_state, SensorData *sensor_data) {
         uint32_t elapsed_ms = clock_state->now_ms - 45000;
         uint32_t drops = 1 + (elapsed_ms / 1000);
 
-        sensor_data->battery_data.voltage_v = 
-                sensor_data->battery_data.voltage_v - (0.2f * drops);
+        sensor_data->battery_data.voltage_v = BATTERY_START_V - (0.2f * drops);
     }
 }
