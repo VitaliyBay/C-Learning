@@ -33,7 +33,7 @@ Status legend: `[ ]` not done, `[x]` done.
 ## Phase 4 — Scenario timeline
 
 - [X] **Task 11 — Make battery drop depend on time, not on previous value**
-- [ ] **Task 12 — Climb ramp from 5 s to 15 s**
+- [X] **Task 12 — Climb ramp from 5 s to 15 s**
 - [ ] **Task 13 — Roll disturbance and recovery ramps**
 - [ ] **Task 14 — GPS satellite degradation schedule**
 
